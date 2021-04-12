@@ -17,14 +17,14 @@
     <script>
         //enter js here...
         const imageGallery = document.getElementById("imageGallery");
-        const imgArr = [];
+        const imgArr = []; //array to store image url's after fetch
 
         fetch(`https://dog.ceo/api/breeds/image/random`)
         .then(response => response.json())
-        .then(data => imgArr.push(data.message))
+        .then(data => imgArr.push(data.message)) //push image url to array
         .catch(error => console.log(error));
 
-        function addNewImage(imgUrl){
+        function addNewImage(imgUrl){ 
             let newImg = document.createElement("img");
             let newListItem = document.createElement("li");
             newListItem.appendChild(newImg);
