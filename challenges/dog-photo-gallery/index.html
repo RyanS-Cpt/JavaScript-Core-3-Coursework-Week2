@@ -10,13 +10,28 @@
     <title>Random Image of a Dog</title>
 </head>
 <body>
-    
+    <ul id = "imageGallery"></ul>
+
+
+
     <script>
         //enter js here...
+        const imageGallery = document.getElementById("imageGallery");
+        const imgArr = [];
+
         fetch(`https://dog.ceo/api/breeds/image/random`)
         .then(response => response.json())
-        .then(data => console.log(data.message))
+        .then(data => imgArr.push(data.message))
         .catch(error => console.log(error));
+
+        function addNewImage(imgUrl){
+            let newImg = document.createElement("img");
+            let newListItem = document.createElement("li");
+            newListItem.appendChild(newImg);
+            imageGallery.appendChild(newListItem);
+
+
+        }
     </script>
 </body>
 </html>
