@@ -10,19 +10,31 @@
     <title>Random Image of a Dog</title>
 </head>
 <body>
+    <button id="addImg">Get new image</button>
     <ul id = "imageGallery"></ul>
-
+    <button id="showImg">Show new image</button>
 
 
     <script>
         //enter js here...
         const imageGallery = document.getElementById("imageGallery");
-        const imgArr = []; //array to store image url's after fetch
+        const imgArr = []; //array to store image Urls after fetch
+        const addImg = document.getElementById("addImg");
+        const showImg = document.getElementById("showImg")
 
-        fetch(`https://dog.ceo/api/breeds/image/random`)
-        .then(response => response.json())
+        addImg.addEventListener("click", function(){
+            fetch(`https://dog.ceo/api/breeds/image/random`)
+            .then(response =>  {
+                console.log(response);
+            if(response.status >= 200 && response.status < 300){
+            return response.json()}
+            else{
+                throw `Error ${response.status}:${response.text}`; 
+            }})
+
         .then(data => imgArr.push(data.message)) //push image url to array
-        .catch(error => console.log(error));
+        .catch(error => console.log(error))
+        });
 
         function addNewImage(imgUrl){ 
             let newImg = document.createElement("img");
@@ -30,8 +42,14 @@
             newListItem.appendChild(newImg);
             imageGallery.appendChild(newListItem);
 
+            newImg.src = "";
+
 
         }
+
+        showImg.addEventListener("click", addNewImage);
+
+
     </script>
 </body>
 </html>
