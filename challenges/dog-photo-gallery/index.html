@@ -6,13 +6,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         /* any styling can be done here... */
+        body{
+            max-width: 100vw;
+        }
+        li{
+            list-style: none;
+        }
+        ul{
+            display: flex;
+            max-width: 80vw;
+            flex-wrap: wrap;
+            margin: auto;
+            position: absolute;
+            top: 20%;
+            left: 15%;
+        }
+        img{
+            max-width: 40vw;
+            height: auto;
+            max-height: 50vh;
+        }
+        #container{
+            display: flex;
+        }
+        h1{
+            margin: auto;
+        }
+        h4{
+            position: absolute;
+            left: 45%;   
+        }
+        a{
+            color: black;
+        }
     </style>
     <title>Random Image of a Dog</title>
 </head>
 <body>
+    <div id="container">
     <button id="addImg">Get new image</button>
-    <ul id = "imageGallery"></ul>
+    <h1>Random Dog image generator</h1>
     <button id="showImg">Show new image</button>
+    </div>
+     <h4>Image source: <a href="https://dog.ceo/api" target="_blank">Dog Ceo</a></h4>
+    <ul id="imageGallery"></ul>
 
 
     <script>
@@ -25,15 +62,16 @@
         addImg.addEventListener("click", function(){
             fetch(`https://dog.ceo/api/breeds/image/random`)
             .then(response =>  {
-                console.log(response);
             if(response.status >= 200 && response.status < 300){
-            return response.json()}
+
+            return response.json();}
+
             else{
                 throw `Error ${response.status}:${response.text}`; 
             }})
 
         .then(data => imgArr.push(data.message)) //push image url to array
-        .catch(error => console.log(error))
+        .catch(error => alert(error))
         });
 
         function addNewImage(imgUrl){ 
@@ -49,6 +87,7 @@
         }
 
         showImg.addEventListener("click", addNewImage);
+        window.onload(alert("Please click get new image first"));
 
 
     </script>
