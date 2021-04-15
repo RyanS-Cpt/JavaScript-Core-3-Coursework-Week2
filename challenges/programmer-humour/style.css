@@ -1,0 +1,12 @@
+body{
+    background-color: darkred;
+}
+img{
+    display: block;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+}
+h1{
+    text-align: center;
+}
