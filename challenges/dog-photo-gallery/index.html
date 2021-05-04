@@ -1,95 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-        /* any styling can be done here... */
-        body{
-            max-width: 100vw;
-        }
-        li{
-            list-style: none;
-        }
-        ul{
-            display: flex;
-            max-width: 80vw;
-            flex-wrap: wrap;
-            margin: auto;
-            position: absolute;
-            top: 20%;
-            left: 15%;
-        }
-        img{
-            max-width: 40vw;
-            height: auto;
-            max-height: 50vh;
-        }
-        #container{
-            display: flex;
-        }
-        h1{
-            margin: auto;
-        }
-        h4{
-            position: absolute;
-            left: 45%;   
-        }
-        a{
-            color: black;
-        }
+      /* any styling can be done here... */
+      body {
+        max-width: 100vw;
+      }
+      li {
+        list-style: none;
+      }
+      ul {
+        display: flex;
+        max-width: 80vw;
+        flex-wrap: wrap;
+        margin: auto;
+        position: absolute;
+        top: 20%;
+        left: 15%;
+      }
+      img {
+        max-width: 40vw;
+        height: auto;
+        max-height: 50vh;
+      }
+      #container {
+        display: flex;
+      }
+      h1 {
+        margin: auto;
+      }
+      h4 {
+        position: absolute;
+        left: 45%;
+      }
+      a {
+        color: black;
+      }
     </style>
     <title>Random Image of a Dog</title>
-</head>
-<body>
+  </head>
+  <body>
     <div id="container">
-    <button id="addImg">Get new image</button>
-    <h1>Random Dog image generator</h1>
-    <button id="showImg">Show new image</button>
+      <button id="addImg">Get new image</button>
+      <h1>Random Dog image generator</h1>
+      <button id="showImg">Show new image</button>
     </div>
-     <h4>Image source: <a href="https://dog.ceo/api" target="_blank">Dog Ceo</a></h4>
+    <h4>
+      Image source: <a href="https://dog.ceo/api" target="_blank">Dog Ceo</a>
+    </h4>
     <ul id="imageGallery"></ul>
 
-
     <script>
-        //enter js here...
-        const imageGallery = document.getElementById("imageGallery");
-        const imgArr = []; //array to store image Urls after fetch
-        const addImg = document.getElementById("addImg");
-        const showImg = document.getElementById("showImg")
+      //enter js here...
+      const imageGallery = document.getElementById("imageGallery");
+      const imgArr = []; //array to store image Urls after fetch
+      const addImg = document.getElementById("addImg");
+      const showImg = document.getElementById("showImg");
 
-        addImg.addEventListener("click", function(){
-            fetch(`https://dog.ceo/api/breeds/image/random`)
-            .then(response =>  {
-            if(response.status >= 200 && response.status < 300){
-
-            return response.json();}
-
-            else{
-                throw `Error ${response.status}:${response.text}`; 
-            }})
-
-        .then(data => imgArr.push(data.message)) //push image url to array
-        .catch(error => alert(error))
-        });
-
-        function addNewImage(imgUrl){ 
-            if(imgArr.length > 0){
-                let newImg = document.createElement("img");
-                let newListItem = document.createElement("li");
-                newListItem.appendChild(newImg);
-                imageGallery.appendChild(newListItem);
-                newImg.src = imgArr[imgArr.length-1];
-            }else{
-                alert("Please click Get new image");
+      addImg.addEventListener("click", function () {
+        fetch(`https://dog.ceo/api/breeds/image/random`)
+          .then((response) => {
+            if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw `Error ${response.status}:${response.text}`;
             }
+          })
+
+          .then((data) => imgArr.push(data.message)) //push image url to array
+          .catch((error) => alert(error));
+      });
+
+      function addNewImage(imgUrl) {
+        if (imgArr.length > 0) {
+          let newImg = document.createElement("img");
+          let newListItem = document.createElement("li");
+          newListItem.appendChild(newImg);
+          imageGallery.appendChild(newListItem);
+          newImg.src = imgArr[imgArr.length - 1];
+        } else {
+          alert("Please click Get new image");
         }
+      }
 
-        showImg.addEventListener("click", addNewImage);
-        window.onload(alert("Please click get new image first"));
-
-
+      showImg.addEventListener("click", addNewImage);
+      window.onload(alert("Please click get new image first"));
     </script>
-</body>
+  </body>
 </html>
